@@ -1,7 +1,7 @@
 const organizationModel = require('./organizationModel');
 
 const createOrganization = async (params) => {
-    const organization = await organizationModel.addOrganization(params);
+    const organization = await organizationModel.createOrganization(params);
     return organization;
 }
 
