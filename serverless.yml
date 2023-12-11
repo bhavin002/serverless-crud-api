@@ -1,0 +1,44 @@
+service: crud-api
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: develop
+  region: us-east-1
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+            - dynamodb:CreateTable
+            - dynamodb:DescribeTable
+            - dynamodb:BatchWriteItem
+          Resource: "arn:aws:dynamodb:us-east-1:*:*"
+        - Effect: Allow
+          Action:
+            -apigateway:POST
+            -apigateway:GET
+            -apigateway:DELETE
+            -apigateway:PUT
+            -apigateway:PATCH
+          Resource: "arn:aws:apigateway:us-east-1::*"
+        - Effect: Allow
+          Action:
+            - execute-api:Invoke
+          Resource: '*'
+
+
+functions:
+  createOrganization:
+    handler: components/organization/organizationController.createOrganization
+    events:
+      - httpApi:
+          path: /organization
+          method: post
