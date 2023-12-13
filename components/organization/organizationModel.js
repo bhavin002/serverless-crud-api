@@ -37,6 +37,27 @@ const createOrganization = async (params) => {
     return await newOrganization.save();
 }
 
+const getAllOrganization = async () => {
+    const organizations = (await Model.scan().exec()).toJSON();
+    return organizations;
+}
+
+const getOrganization = async (params) => {
+    console.log("params model>>>", params)
+    const organization = (await Model.get({ _id: params.organizationId })).toJSON();
+    return organization;
+}
+
+const updateOrganization = async (_id, params) => {
+    console.log("_id >>>", _id)
+    console.log("params >>>", params)
+    const organization = await Model.update({ _id }, params)
+    return organization;
+}
+
 module.exports = {
-    createOrganization
+    createOrganization,
+    getAllOrganization,
+    getOrganization,
+    updateOrganization
 }

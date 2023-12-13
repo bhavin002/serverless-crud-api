@@ -43,6 +43,27 @@ functions:
       - httpApi:
           path: /organization
           method: post
+  getAllOrganization:
+    handler: components/organization/organizationController.getAllOrganization
+    timeout: 30
+    events:
+      - httpApi:
+          path: /organization
+          method: get
+  getOrganization:
+    handler: components/organization/organizationController.getOrganization
+    timeout: 30
+    events:
+      - httpApi:
+          path: /organization/{organizationId}
+          method: get
+  updateOrganization:
+    handler: components/organization/organizationController.updateOrganization
+    timeout: 30
+    events:
+      - httpApi:
+          path: /organization/{organizationId}
+          method: patch
 
 
 	
