@@ -1,6 +1,13 @@
 service: crud-api
 frameworkVersion: '3'
 
+package:
+  exclude:
+    - node_modules
+
+custom:
+  tableName: '${opt:stage, self:provider.stage}'
+
 provider:
   name: aws
   runtime: nodejs18.x
@@ -20,15 +27,8 @@ provider:
             - dynamodb:CreateTable
             - dynamodb:DescribeTable
             - dynamodb:BatchWriteItem
-          Resource: "arn:aws:dynamodb:us-east-1:*:*"
-        - Effect: Allow
-          Action:
-            -apigateway:POST
-            -apigateway:GET
-            -apigateway:DELETE
-            -apigateway:PUT
-            -apigateway:PATCH
-          Resource: "arn:aws:apigateway:us-east-1::*"
+          Resource: 
+            - "arn:aws:dynamodb:us-east-1:*:table/*"
         - Effect: Allow
           Action:
             - execute-api:Invoke
@@ -38,6 +38,7 @@ provider:
 functions:
   createOrganization:
     handler: components/organization/organizationController.createOrganization
+    timeout: 30
     events:
       - httpApi:
           path: /organization

@@ -1,0 +1,7 @@
+for deploy serverless => serverless deploy --stage develop --aws-profile bhavin-002
+
+for deploy specific function => serverless deploy --stage develop function -f functionName --aws-profile bhavin-002
+
+username = bhavin002
+
+git token = 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
