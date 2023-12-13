@@ -1,5 +1,6 @@
 const dynamoose = require('dynamoose');
-import { v4 as uuidv4 } from 'uuid';
+const { v4: uuidv4 } = require('uuid');
+const TABLE_NAMES = require('../../constants/table-names');
 
 const organizationSchema = new dynamoose.Schema({
     _id: {
@@ -21,6 +22,8 @@ const organizationSchema = new dynamoose.Schema({
 })
 
 const Model = dynamoose.model('Organization', organizationSchema)
+
+const Table = new dynamoose.Table(TABLE_NAMES.ORGANIZATION, [Model], { throughput: 'ON_DEMAND', update: ['throughput'] })
 
 const createOrganization = async (params) => {
     let organization = {
