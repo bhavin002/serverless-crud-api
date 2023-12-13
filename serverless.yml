@@ -43,3 +43,9 @@ functions:
       - httpApi:
           path: /organization
           method: post
+
+
+	
+plugins:
+  - serverless-offline
+
