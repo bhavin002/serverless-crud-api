@@ -49,8 +49,6 @@ const getOrganization = async (params) => {
 }
 
 const updateOrganization = async (_id, params) => {
-    console.log("_id >>>", _id)
-    console.log("params >>>", params)
     const organization = await Model.update({ _id }, params)
     return organization;
 }
