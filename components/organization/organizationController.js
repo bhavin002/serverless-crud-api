@@ -17,7 +17,6 @@ const getAllOrganization = async (event) => {
 const getOrganization = async (event) => {
     const organizationId = event.pathParameters;
     const params = GET_ORGANIZATION.validate(organizationId).value
-    console.log("params >>>", params)
     const result = await organizationService.getOrganization(params)
     return { statusCode: 200, body: JSON.stringify(result) }
 }
@@ -26,9 +25,7 @@ const updateOrganization = async (event) => {
     const _id = event.pathParameters;
     const data = JSON.parse(event.body);
     console.log("_id >>>", _id)
-    console.log("data >>>", data)
     const params = PATCH_ORGANIZATION.validate(data).value
-    console.log("params >>>>", params)
     const result = await organizationService.updateOrganization(_id, params)
     return { statusCode: 200, body: JSON.stringify(result) }
 
